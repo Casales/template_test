@@ -1,0 +1,25 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{803FD0C6-D64E-4E16-9DC3-1DAEC859A3D2}") = "template_test", "template_test\template_test.vgdbproj", "{6CDF29A7-2926-42B3-B606-CC5D863E9F0B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|nrf52dk_nrf52832 = Debug|nrf52dk_nrf52832
+		Release|nrf52dk_nrf52832 = Release|nrf52dk_nrf52832
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6CDF29A7-2926-42B3-B606-CC5D863E9F0B}.Debug|nrf52dk_nrf52832.ActiveCfg = Debug|nrf52dk_nrf52832
+		{6CDF29A7-2926-42B3-B606-CC5D863E9F0B}.Debug|nrf52dk_nrf52832.Build.0 = Debug|nrf52dk_nrf52832
+		{6CDF29A7-2926-42B3-B606-CC5D863E9F0B}.Release|nrf52dk_nrf52832.ActiveCfg = Release|nrf52dk_nrf52832
+		{6CDF29A7-2926-42B3-B606-CC5D863E9F0B}.Release|nrf52dk_nrf52832.Build.0 = Release|nrf52dk_nrf52832
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2FC00FC6-6D2E-460D-8E06-729E251D3C21}
+	EndGlobalSection
+EndGlobal
