@@ -15,6 +15,7 @@ typedef enum api_function {
 	API_FUNCTION_HELLO,
 	API_FUNCTION_ECHO,
 	API_FUNCTION_COUNTER,
+	API_FUNCTION_UART,
 	API_FUNCTION_COUNT,
 } api_function_t;
 

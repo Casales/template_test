@@ -6,6 +6,7 @@
       <PathStyle>Unknown</PathStyle>
     </CustomSourceDirectories>
     <AutoProgramSPIFFSPartition>true</AutoProgramSPIFFSPartition>
+    <BoardRoot>.</BoardRoot>
   </Project>
   <Build xsi:type="com.visualgdb.build.cmake">
     <BuildLogMode xsi:nil="true" />
@@ -17,6 +18,7 @@
         <Revision>2</Revision>
       </Version>
     </ToolchainID>
+    <RelativeSourceDirectory />
     <ConfigurationType>DEBUG</ConfigurationType>
     <BinaryDirectory>build/$(PlatformName)/$(ConfigurationName)</BinaryDirectory>
     <MakeCommandTemplate>
@@ -51,6 +53,7 @@
         <BuildAllTargetsInSubdir>false</BuildAllTargetsInSubdir>
         <FoldSingleItemPathLevels>true</FoldSingleItemPathLevels>
       </ProjectItemSettings>
+      <TargetSpecificSettings />
       <SetLDLibraryPathFromDependentArtifacts>true</SetLDLibraryPathFromDependentArtifacts>
       <ProjectGUID>6cdf29a7-2926-42b3-b606-cc5d863e9f0b</ProjectGUID>
       <VirtualFolders />
@@ -82,6 +85,7 @@
     <ShowMessageAfterExecuting>true</ShowMessageAfterExecuting>
   </CustomShortcuts>
   <UserDefinedVariables />
+  <ImportedPropertySheets />
   <CodeSense>
     <Enabled>Unknown</Enabled>
     <ExtraSettings>
@@ -96,20 +100,49 @@
   </CodeSense>
   <Configurations>
     <VisualGDBConfiguration>
-      <PlatformName>nrf52dk_nrf52832</PlatformName>
+      <Name>Debug</Name>
+      <BuildSettingsExtension xsi:type="com.sysprogs.nrfconnect.cmake.extension">
+        <ConfigurationOverride>
+          <Entries>
+            <KeyValue>
+              <Key>DEBUG_OPTIMIZATIONS</Key>
+              <Value>y</Value>
+            </KeyValue>
+            <KeyValue>
+              <Key>THREAD_MONITOR</Key>
+              <Value>y</Value>
+            </KeyValue>
+            <KeyValue>
+              <Key>NO_OPTIMIZATIONS</Key>
+              <Value />
+            </KeyValue>
+            <KeyValue>
+              <Key>SIZE_OPTIMIZATIONS</Key>
+              <Value />
+            </KeyValue>
+          </Entries>
+        </ConfigurationOverride>
+      </BuildSettingsExtension>
+    </VisualGDBConfiguration>
+    <VisualGDBConfiguration>
+      <Name>Release</Name>
+      <BuildSettingsExtension xsi:type="com.sysprogs.nrfconnect.cmake.extension" />
+    </VisualGDBConfiguration>
+    <VisualGDBConfiguration>
+      <PlatformName>xiao_ble_sense</PlatformName>
       <DebugSettingsOverride xsi:type="com.visualgdb.debug.embedded">
         <AdditionalStartupCommands />
         <AdditionalGDBSettings>
           <Features>
             <DisableAutoDetection>false</DisableAutoDetection>
-            <UseFrameParameter>false</UseFrameParameter>
-            <SimpleValuesFlagSupported>false</SimpleValuesFlagSupported>
-            <ListLocalsSupported>false</ListLocalsSupported>
-            <ByteLevelMemoryCommandsAvailable>false</ByteLevelMemoryCommandsAvailable>
-            <ThreadInfoSupported>false</ThreadInfoSupported>
-            <PendingBreakpointsSupported>false</PendingBreakpointsSupported>
-            <SupportTargetCommand>false</SupportTargetCommand>
-            <ReliableBreakpointNotifications>false</ReliableBreakpointNotifications>
+            <UseFrameParameter>true</UseFrameParameter>
+            <SimpleValuesFlagSupported>true</SimpleValuesFlagSupported>
+            <ListLocalsSupported>true</ListLocalsSupported>
+            <ByteLevelMemoryCommandsAvailable>true</ByteLevelMemoryCommandsAvailable>
+            <ThreadInfoSupported>true</ThreadInfoSupported>
+            <PendingBreakpointsSupported>true</PendingBreakpointsSupported>
+            <SupportTargetCommand>true</SupportTargetCommand>
+            <ReliableBreakpointNotifications>true</ReliableBreakpointNotifications>
           </Features>
           <EnableSmartStepping>false</EnableSmartStepping>
           <FilterSpuriousStoppedNotifications>false</FilterSpuriousStoppedNotifications>
@@ -181,31 +214,11 @@
         <CheckInterfaceDrivers>true</CheckInterfaceDrivers>
       </DebugSettingsOverride>
       <ProjectSettingsExtension xsi:type="com.visualgdb.project.external.nrfconnect.extension">
-        <BoardName>nrf52dk_nrf52832</BoardName>
+        <BoardName>xiao_ble_sense</BoardName>
       </ProjectSettingsExtension>
     </VisualGDBConfiguration>
-    <VisualGDBConfiguration>
-      <Name>Debug</Name>
-      <BuildSettingsExtension xsi:type="com.sysprogs.nrfconnect.cmake.extension">
-        <ConfigurationOverride>
-          <Entries>
-            <KeyValue>
-              <Key>DEBUG_OPTIMIZATIONS</Key>
-              <Value>y</Value>
-            </KeyValue>
-            <KeyValue>
-              <Key>THREAD_MONITOR</Key>
-              <Value>y</Value>
-            </KeyValue>
-          </Entries>
-        </ConfigurationOverride>
-      </BuildSettingsExtension>
-    </VisualGDBConfiguration>
-    <VisualGDBConfiguration>
-      <Name>Release</Name>
-      <BuildSettingsExtension xsi:type="com.sysprogs.nrfconnect.cmake.extension" />
-    </VisualGDBConfiguration>
   </Configurations>
+  <ProgramArgumentsSuggestions />
   <Debug xsi:type="com.visualgdb.debug.embedded">
     <AdditionalStartupCommands />
     <AdditionalGDBSettings>

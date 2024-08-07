@@ -3,6 +3,7 @@
 #include <string.h>
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
+#include <zephyr/drivers/uart.h>
 
 #include "rion_application_interface.h"
 #include "serial.h"
@@ -30,6 +31,7 @@ static void send(uint8_t const* p_data, int len);
 static void function_hello(rion_encoding_object_t const* args, bool verbose);
 static void function_echo(rion_encoding_object_t const* args, bool verbose);
 static void function_counter(rion_encoding_object_t const* args, bool verbose);
+static void function_uart(rion_encoding_object_t const* args, bool verbose);
 static void send_notifications_work_queue_handler(struct k_work * work);
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -40,6 +42,7 @@ static rion_application_interface_function_t functions[API_FUNCTION_COUNT] = {
 	[API_FUNCTION_HELLO] = { .name = "hello", .function = function_hello },
 	[API_FUNCTION_ECHO] = { .name = "echo", .function = function_echo },
 	[API_FUNCTION_COUNTER] = { .name = "counter", .description = "counts up when called", .function = function_counter },
+	[API_FUNCTION_UART] = { .name = "uart", .function = function_uart },
 };
 
 K_WORK_DEFINE(send_notification_work, send_notifications_work_queue_handler);
@@ -63,7 +66,7 @@ static void send(uint8_t const* p_data, int len)
 		k_sleep(K_MSEC(min_pause_between_transmissions - time_since_last_sent));
 	}
 	serial_send(K_FOREVER, p_data, len);
-	serial_wait_for_tx_complete(K_FOREVER);
+	serial_wait_for_tx_complete(K_MSEC(10));
 	last_time_sent = k_uptime_get();
 }
 
@@ -86,6 +89,27 @@ static void function_counter(rion_encoding_object_t const* args, bool verbose)
 {
 	static int counter = 0;
 	rion_application_interface_response_append_int(NULL, ++counter);
+}
+
+static void function_uart(rion_encoding_object_t const* args, bool verbose)
+{
+	static const struct device *const uart = DEVICE_DT_GET(DT_CHOSEN(zephyr_console));
+	uint32_t rts = 0;
+	uint32_t dtr = 0;
+	uint32_t dcd = 0;
+	uint32_t dsr = 0;
+	uart_line_ctrl_get(uart, UART_LINE_CTRL_RTS, &rts);
+	uart_line_ctrl_get(uart, UART_LINE_CTRL_DTR, &dtr);
+	uart_line_ctrl_get(uart, UART_LINE_CTRL_DCD, &dcd);
+	uart_line_ctrl_get(uart, UART_LINE_CTRL_DSR, &dsr);
+	rion_application_interface_response_append_key(NULL, "rts", 3);
+	rion_application_interface_response_append_int(NULL,  rts);
+	rion_application_interface_response_append_key(NULL, "dtr", 3);
+	rion_application_interface_response_append_int(NULL,  dtr);
+	rion_application_interface_response_append_key(NULL, "dcd", 3);
+	rion_application_interface_response_append_int(NULL,  dcd);
+	rion_application_interface_response_append_key(NULL, "dsr", 3);
+	rion_application_interface_response_append_int(NULL,  dsr);
 }
 
 static void send_notifications_work_queue_handler(struct k_work * work)

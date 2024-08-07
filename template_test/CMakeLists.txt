@@ -26,7 +26,7 @@ else()
 endif()
 
 #prepend current directory to board root list to allow adding new boards and overwriting boards that exist in the zephyr tree
-#list(PREPEND BOARD_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
+list(PREPEND BOARD_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
 #append board root to include boards from bklibc
 list(APPEND BOARD_ROOT ${BKLIBC_PATH}/include/zephyr)
 
